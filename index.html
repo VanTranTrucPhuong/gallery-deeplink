@@ -23,12 +23,12 @@
 
   <body>
     <section>
-      <h2>Slider Scenario 1 (width = 100%)</h2>
+      <h2>Demo</h2>
 
       <!-- Correct iframe (MUST NOT be self-closing) -->
       <iframe
         id="myFrame"
-        src="http://localhost:3001/?cl=57&gid=224"
+        src="https://galleryqa.entribe.com/?cl=57&gid=252"
         frameborder="0"
         scrolling="no"
         width="100%"
@@ -38,12 +38,6 @@
     </section>
 
     <script type="text/javascript">
-      console.log("Parent loaded");
-
-      // 1. Get parent query params, e.g. ?user=123&token=abc
-      const parentQuery = window.location.search;
-      console.log("Parent query params:", parentQuery);
-
       // 2. Get iframe
       const iframe = document.getElementById("myFrame");
       window.addEventListener("message", (event) => {
@@ -52,10 +46,12 @@
           event.data === "iframe-ready"
         ) {
           console.log("Iframe ready, sending query");
-
+          // 1. Get parent query params, e.g. ?user=123&token=abc
+          const parentQuery = window.location.search;
+          const parentHref = window.location.href;
           iframe.contentWindow.postMessage(
-            { query: parentQuery, parentHref: window.location.href },
-            "http://localhost:3001"
+            { parentQuery, parentHref },
+            "https://galleryqa.entribe.com"
           );
         }
       });
