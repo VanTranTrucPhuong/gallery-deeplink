@@ -46,15 +46,18 @@
 
       // 2. Get iframe
       const iframe = document.getElementById("myFrame");
+      window.addEventListener("message", (event) => {
+        if (
+          event.source === iframe.contentWindow &&
+          event.data === "iframe-ready"
+        ) {
+          console.log("Iframe ready, sending query");
 
-      // 3. Send query to iframe when it fully loads
-      iframe.addEventListener("load", () => {
-        console.log("Iframe loaded. Sending message...");
-
-        iframe.contentWindow.postMessage(
-          { query: parentQuery, parentHref: window.location.href },
-          "http://localhost:3001" // MUST match iframe origin exactly
-        );
+          iframe.contentWindow.postMessage(
+            { query: parentQuery, parentHref: window.location.href },
+            "http://localhost:3001"
+          );
+        }
       });
     </script>
   </body>
