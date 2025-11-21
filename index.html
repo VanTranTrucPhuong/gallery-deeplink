@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Script Tag Gallery Demo</title>
+    <title>EnTribe Demo</title>
 
     <style>
       body {
@@ -16,7 +16,7 @@
         margin: 1rem;
         padding: 1rem;
         background-color: rgb(254, 235, 208);
-        width: 770px;
+        width: 90%;
       }
     </style>
   </head>
@@ -32,7 +32,7 @@
         frameborder="0"
         scrolling="no"
         width="100%"
-        height="500px"
+        height="600px"
         title="Testing Gallery Hello"
       ></iframe>
     </section>
@@ -52,7 +52,7 @@
         console.log("Iframe loaded. Sending message...");
 
         iframe.contentWindow.postMessage(
-          { query: parentQuery },
+          { query: parentQuery, parentHref: window.location.href },
           "http://localhost:3001" // MUST match iframe origin exactly
         );
       });
